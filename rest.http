@@ -1,0 +1,83 @@
+
+### GET all users -- aspect code 200
+GET http://localhost:4000/users
+
+### GET user by user id -- aspect code 200
+GET  http://localhost:4000/users/7ca29540-0942-413e-852a-45c169817964
+
+### GET not valid id -- aspect code 400
+GET http://localhost:4000/users/some_id
+
+### GET not existing user -- aspect code 404
+GET http://localhost:4000/users/7ca29540-0942-411e-852a-45c169817964
+
+### POST add new user -- aspect code 201
+POST http://localhost:4000/users
+content-type: application/json
+
+{
+    "name": "Alex",
+    "age":23,
+    "hobbies": [
+      "Sing",
+      "Guitars"
+    ]
+} 
+
+### POST add new user NOT valid body -- aspect code 500
+POST http://localhost:4000/users
+content-type: application/json
+
+{
+    "name": "Alex",
+    "age" : "age",
+} 
+
+### PUT update user by user id -- aspect code 200
+PUT http://localhost:4000/users/7ca29540-0942-413e-852a-45c169817964
+content-type: application/json
+
+{
+  "name": "Alex",
+  "age": 88,
+  "hobbies":[]
+}
+
+### PUT update user by user id NOT exist -- aspect code 404
+PUT http://localhost:4000/users/1c1b6a9e-97d6-47e5-9776-f16bef9191f2
+content-type: application/json
+
+{
+  "name": "Alex",
+  "hobbies":[]
+}
+
+### PUT update user by user id NOT valid user id -- aspect code 400
+PUT http://localhost:4000/users/some_id
+content-type: application/json
+
+{
+  "name": "Alex",
+  "age": 22,
+  "hobbies":[]
+}
+
+### PUT update user by user id user NOT existing -- aspect code 404
+PUT http://localhost:4000/users/1c1b6a9e-97d6-4725-9776-f16bef9191f2
+content-type: application/json
+
+{
+  "name": "Alex",
+  "age": 22,
+  "hobbies":[]
+}
+
+### DELELTE delete user by user id -- aspect code 204
+DELETE http://localhost:4000/users/1c1b6a9e-97d6-47e5-9776-f16bef9191f2
+
+### DELETE delete user by user id NOT Valid -- aspect code 400
+DELETE http://localhost:4000/users/some_id
+
+
+### DELETE delete user by user id NOT exist -- aspect code 404
+DELETE http://localhost:4000/users/1c1b6a9e-97d6-47e5-0076-f16bef9191f2
