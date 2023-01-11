@@ -6,11 +6,13 @@
   "main": "index.js",
   "scripts": {
     "start:prod": "rimraf build && webpack --mode=production --node-env=production --config webpack/webpack.config.cjs && node build/index.cjs",
-    "start:dev": "nodemon --watch 'src/' --ext '*.ts' --exec ts-node src/index.ts",
-    "lint": "eslint --ext .js,.ts .",
+    "start:dev": "nodemon --ignore '__test__/*' --watch 'src/' --ext '*.ts' --exec ts-node src/index.ts",
+    "start:multi": "ts-node src/multi.ts",
     "test": "jest",
     "view:cov": "cd coverage/lcov-report/ && google-chrome index.html",
-    "test:dev": "jest --detectOpenHandles --watch"
+    "test:dev": "jest --detectOpenHandles --watch",
+    "lint": "eslint --ext .js,.ts .",
+    "grep:node": "ps aux | grep node"
   },
   "nodemonConfig": {
     "ext": "*.ts",

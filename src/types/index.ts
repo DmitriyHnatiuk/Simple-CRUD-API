@@ -21,3 +21,11 @@ export type RoutType = {
   method: string;
   isDynamicUrl: boolean;
 };
+
+export type DataType = Record<string, UserType>;
+
+export enum STATUS_CODE {
+  POST = 201,
+  PUT = 200,
+  DELETE = 204,
+}

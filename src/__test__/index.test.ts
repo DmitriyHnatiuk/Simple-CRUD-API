@@ -18,19 +18,19 @@ describe("Test", () => {
 
   describe("GET", () => {
     test("GET users should return status code 200", async () => {
-      await serverStart.get("/users").expect(200);
+      await serverStart.get("/api/users").expect(200);
       await serverStart.get("/favicon.ico").expect(200);
     });
 
     test("GET all users data should be array", async () => {
-      const response = await serverStart.get("/users");
+      const response = await serverStart.get("/api/users");
       const data = await response.body;
       expect(Array.isArray(data)).toBe(true);
     });
 
     test("GET user by wrong id should return 400|404", async () => {
-      await serverStart.get("/users/someId").expect(400);
-      await serverStart.get(`/users/${NOT_EXIST_USER_ID}`).expect(404);
+      await serverStart.get("/api/users/someId").expect(400);
+      await serverStart.get(`/api/users/${NOT_EXIST_USER_ID}`).expect(404);
     });
 
     test("GET 404 page", async () => {
@@ -41,15 +41,15 @@ describe("Test", () => {
   describe("POST", () => {
     test("POST create new user should return status code 201", async () => {
       await serverStart
-        .post("/users")
+        .post("/api/users")
         .send({ ...newUser, id: 12 })
         .expect(201);
     });
 
     test("POST with wrong data should return status code 500|400", async () => {
-      await serverStart.post("/users").send("data").expect(500);
+      await serverStart.post("/api/users").send("data").expect(500);
       await serverStart
-        .post("/users")
+        .post("/api/users")
         .send({ ...newUser, age: {} })
         .expect(400);
     });
@@ -57,34 +57,35 @@ describe("Test", () => {
 
   describe("PUT", () => {
     test("GET and PUT first users should return arr with changed user", async () => {
-      const response = await serverStart.get("/users");
+      const response = await serverStart.get("/api/users");
 
       const { body } = await response;
 
       const [firstUser, ...rest] = body;
       const { id: userId } = firstUser;
 
-      await serverStart.get(`/users/${userId}`).expect(200);
+      await serverStart.get(`/api/users/${userId}`).expect(200);
 
-      await serverStart.put(`/users/${userId}`).send("data").expect(500);
+      await serverStart.put(`/api/users/${userId}`).send("data").expect(500);
 
       const putResponse = await serverStart
-        .put(`/users/${userId}`)
-        .send(newUser);
+        .put(`/api/users/${userId}`)
+        .send(newUser)
+        .expect(200);
 
       const { body: putBody } = putResponse;
 
       expect(putBody.name).toBe(newUser.name);
     });
     test("PUT user by wrong user id should return 400|404", async () => {
-      await serverStart.put(`/users/${NOT_EXIST_USER_ID}`).expect(404);
-      await serverStart.put(`/users/someId`).expect(400);
+      await serverStart.put(`/api/users/${NOT_EXIST_USER_ID}`).expect(404);
+      await serverStart.put(`/api/users/someId`).expect(400);
     });
   });
 
   describe("DELETE", () => {
     test("POST and DELETE users should return user not exist", async () => {
-      const response = await serverStart.post(`/users`).send(newUser);
+      const response = await serverStart.post(`/api/users`).send(newUser);
       const { body } = response;
 
       expect(body.includes(newUser)).toBe(false);
@@ -95,14 +96,14 @@ describe("Test", () => {
       );
 
       expect(user).toEqual(newUser);
-      await serverStart.delete(`/users/${userId}`).expect(200);
-      const { body: data } = await serverStart.get("/users");
+      await serverStart.delete(`/api/users/${userId}`).expect(204);
+      const { body: data } = await serverStart.get("/api/users");
       expect(data.find((user: UserType) => user.id === userId)).toBe(undefined);
     });
 
     test("DELETE user by wrong user id should return 400|404", async () => {
-      await serverStart.delete(`/users/${NOT_EXIST_USER_ID}`).expect(404);
-      await serverStart.delete(`/users/someId`).expect(400);
+      await serverStart.delete(`/api/users/${NOT_EXIST_USER_ID}`).expect(404);
+      await serverStart.delete(`/api/users/someId`).expect(400);
     });
   });
 });

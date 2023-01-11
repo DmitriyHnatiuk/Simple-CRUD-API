@@ -1,9 +1,41 @@
 import http, { IncomingMessage, ServerResponse } from "http";
 import { CallBackType, RoutType } from "./types/index.js";
+import { responseHandlerError } from "./utils/helpers.js";
 import { compareUrl } from "./utils/urlHelper.js";
 
 export const customExpress = () => {
   const routers: RoutType[] = [];
+  const middlewares: ((
+    req: IncomingMessage,
+    res: ServerResponse,
+    next: () => void
+  ) => void)[] = [];
+
+  let count = 0;
+
+  const middleware = (
+    req: IncomingMessage,
+    res: ServerResponse,
+    callback: (req: IncomingMessage, res: ServerResponse) => void
+  ) => {
+    try {
+      const _middleware = middlewares[count];
+
+      const next = () => {
+        count += 1;
+        return middleware(req, res, callback);
+      };
+
+      if (_middleware) {
+        return _middleware(req, res, next);
+      }
+      count = 0;
+      return callback(req, res);
+    } catch (err) {
+      count = 0;
+      responseHandlerError(res);
+    }
+  };
 
   return {
     get(url: string, callback: CallBackType) {
@@ -42,7 +74,21 @@ export const customExpress = () => {
       });
     },
 
-    listen(port: number | string) {
+    use(
+      callback?: (
+        req: IncomingMessage,
+        res: ServerResponse,
+        next: () => void
+      ) => void
+    ) {
+      if (typeof callback !== "function") {
+        return;
+      }
+
+      middlewares.push(callback);
+    },
+
+    listen(port: number) {
       const handler = (req: IncomingMessage, res: ServerResponse) => {
         for (const rout of routers) {
           if (req.method === rout.method) {
@@ -53,7 +99,7 @@ export const customExpress = () => {
             });
 
             if (isSameUrl) {
-              return rout.callback(req, res);
+              return middleware(req, res, rout.callback);
             }
           }
         }

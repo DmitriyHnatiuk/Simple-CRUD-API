@@ -1,18 +1,24 @@
-import { UserType } from "../types";
-
-const _initialValue = {};
+import { DataType, UserType } from "../types";
 
 export class UsersData {
-  data: Record<string, UserType>;
-  protected setData(data: Record<string, UserType>) {
+  data: DataType;
+  protected setData(data: DataType) {
     this.data = data;
   }
 
-  constructor(initialValue = _initialValue || {}) {
+  constructor(initialValue = {}) {
     this.data = initialValue;
     this.setData.bind(this);
   }
   getData() {
+    return this.data;
+  }
+
+  updateData(data: DataType) {
+    return this.setData(data);
+  }
+
+  getUsers() {
     return Object.values(this.data);
   }
 
