@@ -9,7 +9,7 @@
     "start:dev": "nodemon --ignore '__test__/*' --watch 'src/' --ext '*.ts' --exec ts-node src/index.ts",
     "start:multi": "ts-node src/multi.ts",
     "test": "jest",
-    "view:cov": "cd coverage/lcov-report/ && google-chrome index.html",
+    "view:test_cover": "cd coverage/lcov-report/ && google-chrome index.html",
     "test:dev": "jest --detectOpenHandles --watch",
     "lint": "eslint --ext .js,.ts .",
     "grep:node": "ps aux | grep node"

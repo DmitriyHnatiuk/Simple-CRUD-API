@@ -2,73 +2,253 @@
 
 [Assignment task_3](https://github.com/AlreadyBored/nodejs-assignments/blob/main/assignments/crud-api/assignment.md)
 
-Implemented endpoint api/users:
+# This is a REST API example application
 
-# GET api/users is used to get all persons
+Implemented endpoint api/users
+In `package.json` we have some basic commands:
 
-Server should answer with status code 200 and all users records
+`start:prod` start server(for production).
+`start:dev` start server(for development).  
+`start:multi`: start server with multiple ports and load Load Balancing.
+`test` runs a simplistic test and the API.
 
-# GET api/users/${userId}
+and other necessary commands like:
 
-Server should answer with status code 200 and and record with id === userId if it exists
-Server should answer with status code 400 and corresponding message if userId is invalid (not uuid)
-Server should answer with status code 404 and corresponding message if record with id === userId doesn't exist
+`view:test_cover` shows coverage test in chrome browser(run after command test)
+`test:dev` for writing test
+`lint` for check code on eslint
 
-# POST api/users is used to create record about new user and store it in database
+## Don't forgat Install npm packages
 
-Server should answer with status code 201 and newly created record
-Server should answer with status code 400 and corresponding message if request body does not contain required fields
+`npm install` or (`npm i`)
 
-# PUT api/users/{userId} is used to update existing user
+## Run the app
 
-Server should answer with status code 200 and updated record
-Server should answer with status code 400 and corresponding message if userId is invalid (not uuid)
-Server should answer with status code 404 and corresponding message if record with id === userId doesn't exist
+If you want to set the port for the server, you need to add a `.env` file with a port number (for example, `PORT=4000`) if the file does not exist, the server will run on port `3000`.
+`npm run start:prod` or `npm run start:dev`
 
-# DELETE api/users/${userId} is used to delete existing user from database
+## Run the tests
 
-Server should answer with status code 204 if the record is found and deleted
-Server should answer with status code 400 and corresponding message if userId is invalid (not uuid)
-Server should answer with status code 404 and corresponding message if record with id === userId doesn't exist
+`npm run test`
 
-### Users are stored as objects that have following properties:
+# REST API
 
-id — unique identifier (string, uuid) generated on server side
-username — user's name (string, required)
-age — user's age (number, required)
-hobbies — user's hobbies (array of strings or empty array, required)
+The REST API to the example app is described below.
 
-Requests to non-existing endpoints (e.g. some-non/existing/resource) should be handled (server should answer with status code 404 and corresponding human-friendly message)
+## Get list of Users
 
-Errors on the server side that occur during the processing of a request should be handled and processed correctly (server should answer with status code 500 and corresponding human-friendly message)
+### Request
 
-Value of port on which application is running should be stored in .env file
-There should be 2 modes of running application (development and production):
-The application is run in development mode using nodemon (there is a npm script start:dev)
-The application is run in production mode (there is a npm script start:prod that starts the build process and then runs the bundled file)
+`GET api/users`
 
-### There could be some tests for API (not less than 3 scenarios). Example of test scenario:
+    curl -i -H 'Accept: application/json' http://localhost:4000/api/users
 
-# Get all records with a GET api/users request (an empty array is expected)
+`or`(without `.env` file)
 
-# A new object is created by a POST api/users request (a response containing newly created record is expected)
+    curl -i -H 'Accept: application/json' http://localhost:3000/api/users
 
-# With a GET api/user/{userId} request, we try to get the created record by its id (the created record is expected)
+<details>
+  <summary>Response</summary>
+  <div>
+    <p>
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      Date: Thu, 01 Jan 2023 01:00:00 GMT
+      Connection: keep-alive
+      Keep-Alive: timeout=5
+      Transfer-Encoding: chunked
+    </p>
+    <br>
+    <p>[]</p>
+  </div>
+</details>
 
-# We try to update the created record with a PUT api/users/{userId}request (a response is expected containing an updated object with the same id)
+## Create a new User
 
-# With a DELETE api/users/{userId} request, we delete the created object by id (confirmation of successful deletion is expected)
+### Request
 
-# With a GET api/users/{userId} request, we are trying to get a deleted object by id (expected answer is that there is no such object)
+`POST /api/users`
 
-### There could be implemented horizontal scaling for application (there is a npm script start:multi that starts multiple instances of your application using the Node.js Cluster API (equal to the number of logical processor cores on the host machine, each listening on port PORT + n) with a load balancer that distributes requests across them (using Round-robin algorithm). For example: host machine has 4 cores, PORT is 4000. On run npm run start:multi it works following way
+    curl -i -H 'Accept: application/json' -d '{"name":"Alex","age":20,"hobbies":[]}' http://localhost:4000/api/users
 
-On localhost:4000/api load balancer is listening for requests
-On localhost:4001/api, localhost:4002/api, localhost:4003/api, localhost:4004/api workers are listening for requests from load balancer
-When user sends request to localhost:4000/api, load balancer sends this request to localhost:4001/api, next user request is sent to localhost:4002/api and so on.
-After sending request to localhost:4004/api load balancer starts from the first worker again (sends request to localhost:4001/api)
-State of db should be consistent between different workers, for example:
-First POST request addressed to localhost:4001/api creates user
-Second GET request addressed to localhost:4002/api should return created user
-Third DELETE request addressed to localhost:4003/api deletes created user
-Fourth GET request addressed to localhost:4004/api should return 404 status code for created user
+`or`(without `.env` file)
+
+    curl -i -H 'Accept: application/json' -d '{"name":"Alex","age":20,"hobbies":[]}' http://localhost:3000/api/users
+
+### Response
+
+    HTTP/1.1 201 Created
+    Content-Type: application/json
+    Date: Thu, 01 Jan 2023 01:00:00 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+    Transfer-Encoding: chunked
+
+`[{"name":"Alex","age":20,"hobbies":[],"id":"99844815-a09b-462e-92d1-7cabdef66ffc"}]`
+
+## Get a specific User
+
+### Request
+
+`GET /api/users/:id`
+
+    curl -i -H 'Accept: application/json' http://localhost:4000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
+
+`or`(without `.env` file)
+
+    curl -i -H 'Accept: application/json' http://localhost:3000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
+
+### Response
+
+    HTTP/1.1 200 OK
+    Content-Type: application/json
+    Date: Thu, 01 Jan 2023 01:00:00 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+    Transfer-Encoding: chunked
+
+`{"name":"Alex","age":22,"hobbies":[],"id":"99844815-a09b-462e-92d1-7cabdef66ffc"}`
+
+## Get a non-existent User
+
+### Request
+
+`GET /api/users/:id`
+
+    curl -i -H 'Accept: application/json' http://localhost:4000/api/users/99844815-a09b-462e-92d1-4cabdef66ffc
+
+`or`(without `.env` file)
+
+    curl -i -H 'Accept: application/json' http://localhost:3000/api/users/some_id
+
+### Response
+
+    HTTP/1.1 404 Not Found
+    Content-Type: application/json
+    Date: Thu, 01 Jan 2023 01:00:00 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+    Transfer-Encoding: chunked
+
+`{"message":"User not exist"}`
+
+`or if id not valid`
+
+    HTTP/1.1 400 Bad Request
+    Content-Type: application/json
+    Date: Thu, 01 Jan 2023 01:00:00 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+    Transfer-Encoding: chunked
+
+`{"message":"Not valid user id"}`
+
+## Change a User state
+
+### Request
+
+`PUT api/users/:id`
+
+curl -i -H 'Accept: application/json' -X PUT -d '{"name":"Alex","age":25,"hobbies":[]}' http://localhost:4000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
+
+`or`(without `.env` file)
+
+curl -i -H 'Accept: application/json' -X PUT -d '{"name":"Alex","age":25,"hobbies":[]}' http://localhost:3000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
+
+### Response
+
+    HTTP/1.1 200 OK
+    Content-Type: application/json
+    Date: Thu, 01 Jan 2023 01:00:00 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+    Transfer-Encoding: chunked
+
+`{"name":"Alex","age":25,"hobbies":[],"id":"99844815-a09b-462e-92d1-7cabdef66ffc"}`
+
+## Attempt to change a Users using invalid params
+
+### Request
+
+`PUT /api/users/:id`
+
+curl -i -H 'Accept: application/json' -X PUT -d '{"name":"Alex","age":"string"}' http://localhost:4000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
+
+`or`(without `.env` file)
+
+curl -i -H 'Accept: application/json' -X PUT -d '{"name":"Alex","age":"string"}' http://localhost:3000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
+
+### Response
+
+    HTTP/1.1 400 Bad Request
+    Content-Type: application/json
+    Date: Thu, 01 Jan 2023 01:00:00 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+    Transfer-Encoding: chunked
+
+`{"message":"Not contain required fields age,hobbies"}`
+
+## Delete a User
+
+### Request
+
+`DELETE /api/users/:id`
+
+curl -i -H 'Accept: application/json' -X DELETE http://localhost:4000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
+
+`or`(without `.env` file)
+
+curl -i -H 'Accept: application/json' -X DELETE http://localhost:3000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
+
+### Response
+
+    HTTP/1.1 204 No Content
+    Content-Type: application/json
+    Date: Thu, 01 Jan 2023 01:00:00 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+
+## Try to delete same User again
+
+### Request
+
+`DELETE /api/users/:id`
+
+curl -i -H 'Accept: application/json' -X DELETE http://localhost:4000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
+
+`or`(without `.env` file)
+
+curl -i -H 'Accept: application/json' -X DELETE http://localhost:3000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
+
+### Response
+
+    HTTP/1.1 404 Not Found
+    Content-Type: application/json
+    Date: Thu, 01 Jan 2023 01:00:00 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+    Transfer-Encoding: chunked
+
+## Get deleted User
+
+### Request
+
+`GET /api/users/:id`
+
+    curl -i -H 'Accept: application/json' http://localhost:4000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
+
+`or`(without `.env` file)
+
+    curl -i -H 'Accept: application/json' http://localhost:3000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
+
+### Response
+
+    HTTP/1.1 404 Not Found
+    Content-Type: application/json
+    Date: Thu, 01 Jan 2023 01:00:00 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+    Transfer-Encoding: chunked
+
+`{"message":"User not exist"}`
