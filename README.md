@@ -158,11 +158,11 @@ Transfer-Encoding: chunked
 
 `PUT api/users/:id`
 
-curl -i -H 'Accept: application/json' -X PUT -d '{"name":"Alex","age":25,"hobbies":[]}' http://localhost:4000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
+    curl -i -H 'Accept: application/json' -X PUT -d '{"name":"Alex","age":25,"hobbies":[]}' http://localhost:4000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
 
 `or`(without `.env` file)
 
-curl -i -H 'Accept: application/json' -X PUT -d '{"name":"Alex","age":25,"hobbies":[]}' http://localhost:3000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
+    curl -i -H 'Accept: application/json' -X PUT -d '{"name":"Alex","age":25,"hobbies":[]}' http://localhost:3000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
 
 <details>
 <summary><h4>Response</h4></summary>
@@ -184,11 +184,11 @@ Transfer-Encoding: chunked
 
 `PUT /api/users/:id`
 
-curl -i -H 'Accept: application/json' -X PUT -d '{"name":"Alex","age":"string"}' http://localhost:4000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
+    curl -i -H 'Accept: application/json' -X PUT -d '{"name":"Alex","age":"string"}' http://localhost:4000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
 
 `or`(without `.env` file)
 
-curl -i -H 'Accept: application/json' -X PUT -d '{"name":"Alex","age":"string"}' http://localhost:3000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
+    curl -i -H 'Accept: application/json' -X PUT -d '{"name":"Alex","age":"string"}' http://localhost:3000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
 
 <details>
 <summary><h4>Response</h4></summary>
@@ -210,11 +210,11 @@ Transfer-Encoding: chunked
 
 `DELETE /api/users/:id`
 
-curl -i -H 'Accept: application/json' -X DELETE http://localhost:4000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
+    curl -i -H 'Accept: application/json' -X DELETE http://localhost:4000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
 
 `or`(without `.env` file)
 
-curl -i -H 'Accept: application/json' -X DELETE http://localhost:3000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
+    curl -i -H 'Accept: application/json' -X DELETE http://localhost:3000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
 
 <details>
 <summary><h4>Response</h4></summary>
@@ -224,7 +224,6 @@ Content-Type: application/json
 Date: Thu, 01 Jan 2023 01:00:00 GMT
 Connection: keep-alive
 Keep-Alive: timeout=5
-</br>
 </pre>
 </details>
 
@@ -234,11 +233,11 @@ Keep-Alive: timeout=5
 
 `DELETE /api/users/:id`
 
-curl -i -H 'Accept: application/json' -X DELETE http://localhost:4000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
+    curl -i -H 'Accept: application/json' -X DELETE http://localhost:4000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
 
 `or`(without `.env` file)
 
-curl -i -H 'Accept: application/json' -X DELETE http://localhost:3000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
+    curl -i -H 'Accept: application/json' -X DELETE http://localhost:3000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
 
 <details>
 <summary><h4>Response</h4></summary>
