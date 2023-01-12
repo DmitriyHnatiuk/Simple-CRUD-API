@@ -48,19 +48,17 @@ The REST API to the example app is described below.
     curl -i -H 'Accept: application/json' http://localhost:3000/api/users
 
 <details>
-  <summary>Response</summary>
-  <div>
-    <p>
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      Date: Thu, 01 Jan 2023 01:00:00 GMT
-      Connection: keep-alive
-      Keep-Alive: timeout=5
-      Transfer-Encoding: chunked
-    </p>
-    <br>
-    <p>[]</p>
-  </div>
+<summary><h4>Response</h4></summary>
+<pre>
+HTTP/1.1 200 OK
+Content-Type: application/json
+Date: Thu, 01 Jan 2023 01:00:00 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+</br>
+[]
+</pre>
 </details>
 
 ## Create a new User
@@ -75,16 +73,19 @@ The REST API to the example app is described below.
 
     curl -i -H 'Accept: application/json' -d '{"name":"Alex","age":20,"hobbies":[]}' http://localhost:3000/api/users
 
-### Response
-
-    HTTP/1.1 201 Created
-    Content-Type: application/json
-    Date: Thu, 01 Jan 2023 01:00:00 GMT
-    Connection: keep-alive
-    Keep-Alive: timeout=5
-    Transfer-Encoding: chunked
-
-`[{"name":"Alex","age":20,"hobbies":[],"id":"99844815-a09b-462e-92d1-7cabdef66ffc"}]`
+<details>
+<summary><h4>Response</h4></summary>
+<pre>
+HTTP/1.1 201 Created
+Content-Type: application/json
+Date: Thu, 01 Jan 2023 01:00:00 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+</br>
+[{"name":"Alex","age":20,"hobbies":[],"id":"99844815-a09b-462e-92d1-7cabdef66ffc"}]
+</pre>
+</details>
 
 ## Get a specific User
 
@@ -98,16 +99,19 @@ The REST API to the example app is described below.
 
     curl -i -H 'Accept: application/json' http://localhost:3000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
 
-### Response
-
-    HTTP/1.1 200 OK
-    Content-Type: application/json
-    Date: Thu, 01 Jan 2023 01:00:00 GMT
-    Connection: keep-alive
-    Keep-Alive: timeout=5
-    Transfer-Encoding: chunked
-
-`{"name":"Alex","age":22,"hobbies":[],"id":"99844815-a09b-462e-92d1-7cabdef66ffc"}`
+<details>
+<summary><h4>Response</h4></summary>
+<pre>
+HTTP/1.1 200 OK
+Content-Type: application/json
+Date: Thu, 01 Jan 2023 01:00:00 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+</br>
+{"name":"Alex","age":22,"hobbies":[],"id":"99844815-a09b-462e-92d1-7cabdef66ffc"}
+</pre>
+</details>
 
 ## Get a non-existent User
 
@@ -121,27 +125,32 @@ The REST API to the example app is described below.
 
     curl -i -H 'Accept: application/json' http://localhost:3000/api/users/some_id
 
-### Response
+<details>
+<summary><h4>Response</h4></summary>
+<pre>
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+Date: Thu, 01 Jan 2023 01:00:00 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+</br>
+{"message":"User not exist"}
+</pre>
 
-    HTTP/1.1 404 Not Found
-    Content-Type: application/json
-    Date: Thu, 01 Jan 2023 01:00:00 GMT
-    Connection: keep-alive
-    Keep-Alive: timeout=5
-    Transfer-Encoding: chunked
+<code>or</code> if <code>id</code> not valid
 
-`{"message":"User not exist"}`
-
-`or if id not valid`
-
-    HTTP/1.1 400 Bad Request
-    Content-Type: application/json
-    Date: Thu, 01 Jan 2023 01:00:00 GMT
-    Connection: keep-alive
-    Keep-Alive: timeout=5
-    Transfer-Encoding: chunked
-
-`{"message":"Not valid user id"}`
+<pre>
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+Date: Thu, 01 Jan 2023 01:00:00 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+<br>
+{"message":"Not valid user id"}
+</pre>
+</details>
 
 ## Change a User state
 
@@ -155,16 +164,19 @@ curl -i -H 'Accept: application/json' -X PUT -d '{"name":"Alex","age":25,"hobbie
 
 curl -i -H 'Accept: application/json' -X PUT -d '{"name":"Alex","age":25,"hobbies":[]}' http://localhost:3000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
 
-### Response
-
-    HTTP/1.1 200 OK
-    Content-Type: application/json
-    Date: Thu, 01 Jan 2023 01:00:00 GMT
-    Connection: keep-alive
-    Keep-Alive: timeout=5
-    Transfer-Encoding: chunked
-
-`{"name":"Alex","age":25,"hobbies":[],"id":"99844815-a09b-462e-92d1-7cabdef66ffc"}`
+<details>
+<summary><h4>Response</h4></summary>
+<pre>
+HTTP/1.1 200 OK
+Content-Type: application/json
+Date: Thu, 01 Jan 2023 01:00:00 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+</br>
+{"name":"Alex","age":25,"hobbies":[],"id":"99844815-a09b-462e-92d1-7cabdef66ffc"}
+</pre>
+</details>
 
 ## Attempt to change a Users using invalid params
 
@@ -178,16 +190,19 @@ curl -i -H 'Accept: application/json' -X PUT -d '{"name":"Alex","age":"string"}'
 
 curl -i -H 'Accept: application/json' -X PUT -d '{"name":"Alex","age":"string"}' http://localhost:3000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
 
-### Response
-
-    HTTP/1.1 400 Bad Request
-    Content-Type: application/json
-    Date: Thu, 01 Jan 2023 01:00:00 GMT
-    Connection: keep-alive
-    Keep-Alive: timeout=5
-    Transfer-Encoding: chunked
-
-`{"message":"Not contain required fields age,hobbies"}`
+<details>
+<summary><h4>Response</h4></summary>
+<pre>
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+Date: Thu, 01 Jan 2023 01:00:00 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+</br>
+{"message":"Not contain required fields age,hobbies"}
+</pre>
+</details>
 
 ## Delete a User
 
@@ -201,13 +216,17 @@ curl -i -H 'Accept: application/json' -X DELETE http://localhost:4000/api/users/
 
 curl -i -H 'Accept: application/json' -X DELETE http://localhost:3000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
 
-### Response
-
-    HTTP/1.1 204 No Content
-    Content-Type: application/json
-    Date: Thu, 01 Jan 2023 01:00:00 GMT
-    Connection: keep-alive
-    Keep-Alive: timeout=5
+<details>
+<summary><h4>Response</h4></summary>
+<pre>
+HTTP/1.1 204 No Content
+Content-Type: application/json
+Date: Thu, 01 Jan 2023 01:00:00 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+</br>
+</pre>
+</details>
 
 ## Try to delete same User again
 
@@ -221,14 +240,19 @@ curl -i -H 'Accept: application/json' -X DELETE http://localhost:4000/api/users/
 
 curl -i -H 'Accept: application/json' -X DELETE http://localhost:3000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
 
-### Response
-
-    HTTP/1.1 404 Not Found
-    Content-Type: application/json
-    Date: Thu, 01 Jan 2023 01:00:00 GMT
-    Connection: keep-alive
-    Keep-Alive: timeout=5
-    Transfer-Encoding: chunked
+<details>
+<summary><h4>Response</h4></summary>
+<pre>
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+Date: Thu, 01 Jan 2023 01:00:00 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+</br>
+{"message":"User not exist"}
+</pre>
+</details>
 
 ## Get deleted User
 
@@ -242,13 +266,16 @@ curl -i -H 'Accept: application/json' -X DELETE http://localhost:3000/api/users/
 
     curl -i -H 'Accept: application/json' http://localhost:3000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
 
-### Response
-
-    HTTP/1.1 404 Not Found
-    Content-Type: application/json
-    Date: Thu, 01 Jan 2023 01:00:00 GMT
-    Connection: keep-alive
-    Keep-Alive: timeout=5
-    Transfer-Encoding: chunked
-
-`{"message":"User not exist"}`
+<details>
+<summary><h4>Response</h4></summary>
+<pre>
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+Date: Thu, 01 Jan 2023 01:00:00 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+</br>
+{"message":"User not exist"}
+</pre>
+</details>
