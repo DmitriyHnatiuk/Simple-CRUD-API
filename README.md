@@ -67,11 +67,11 @@ Transfer-Encoding: chunked
 
 `POST /api/users`
 
-    curl -i -H 'Accept: application/json' -d '{"name":"Alex","age":20,"hobbies":[]}' http://localhost:4000/api/users
+    curl -i -H 'Accept: application/json' -d '{"username":"Alex","age":20,"hobbies":[]}' http://localhost:4000/api/users
 
 `or`(without `.env` file)
 
-    curl -i -H 'Accept: application/json' -d '{"name":"Alex","age":20,"hobbies":[]}' http://localhost:3000/api/users
+    curl -i -H 'Accept: application/json' -d '{"username":"Alex","age":20,"hobbies":[]}' http://localhost:3000/api/users
 
 <details>
 <summary><h4>Response</h4></summary>
@@ -83,7 +83,7 @@ Connection: keep-alive
 Keep-Alive: timeout=5
 Transfer-Encoding: chunked
 </br>
-[{"name":"Alex","age":20,"hobbies":[],"id":"99844815-a09b-462e-92d1-7cabdef66ffc"}]
+[{"username":"Alex","age":20,"hobbies":[],"id":"99844815-a09b-462e-92d1-7cabdef66ffc"}]
 </pre>
 </details>
 
@@ -109,7 +109,7 @@ Connection: keep-alive
 Keep-Alive: timeout=5
 Transfer-Encoding: chunked
 </br>
-{"name":"Alex","age":22,"hobbies":[],"id":"99844815-a09b-462e-92d1-7cabdef66ffc"}
+{"username":"Alex","age":22,"hobbies":[],"id":"99844815-a09b-462e-92d1-7cabdef66ffc"}
 </pre>
 </details>
 
@@ -158,11 +158,11 @@ Transfer-Encoding: chunked
 
 `PUT api/users/:id`
 
-    curl -i -H 'Accept: application/json' -X PUT -d '{"name":"Alex","age":25,"hobbies":[]}' http://localhost:4000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
+    curl -i -H 'Accept: application/json' -X PUT -d '{"username":"Alex","age":25,"hobbies":[]}' http://localhost:4000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
 
 `or`(without `.env` file)
 
-    curl -i -H 'Accept: application/json' -X PUT -d '{"name":"Alex","age":25,"hobbies":[]}' http://localhost:3000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
+    curl -i -H 'Accept: application/json' -X PUT -d '{"username":"Alex","age":25,"hobbies":[]}' http://localhost:3000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
 
 <details>
 <summary><h4>Response</h4></summary>
@@ -174,7 +174,7 @@ Connection: keep-alive
 Keep-Alive: timeout=5
 Transfer-Encoding: chunked
 </br>
-{"name":"Alex","age":25,"hobbies":[],"id":"99844815-a09b-462e-92d1-7cabdef66ffc"}
+{"username":"Alex","age":25,"hobbies":[],"id":"99844815-a09b-462e-92d1-7cabdef66ffc"}
 </pre>
 </details>
 
@@ -184,11 +184,11 @@ Transfer-Encoding: chunked
 
 `PUT /api/users/:id`
 
-    curl -i -H 'Accept: application/json' -X PUT -d '{"name":"Alex","age":"string"}' http://localhost:4000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
+    curl -i -H 'Accept: application/json' -X PUT -d '{"username":"Alex","age":"string"}' http://localhost:4000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
 
 `or`(without `.env` file)
 
-    curl -i -H 'Accept: application/json' -X PUT -d '{"name":"Alex","age":"string"}' http://localhost:3000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
+    curl -i -H 'Accept: application/json' -X PUT -d '{"username":"Alex","age":"string"}' http://localhost:3000/api/users/99844815-a09b-462e-92d1-7cabdef66ffc
 
 <details>
 <summary><h4>Response</h4></summary>

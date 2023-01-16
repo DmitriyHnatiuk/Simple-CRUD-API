@@ -1,7 +1,7 @@
 import { BodyType } from "../types";
 
 const _validBodyType = {
-  name: "string",
+  username: "string",
   age: "number",
   hobbies: ["string"],
 };

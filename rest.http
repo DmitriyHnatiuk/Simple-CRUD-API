@@ -15,7 +15,7 @@ POST http://localhost:4000/api/users
 content-type: application/json
 
 {
-    "name": "Alex",
+    "username": "Alex",
     "age":23,
     "hobbies": [
       "Sing",
@@ -28,7 +28,7 @@ POST http://localhost:4000/api/users
 content-type: application/json
 
 {
-    "name": "Alex",
+    "username": "Alex",
     "age" : "age",
 } 
 
@@ -36,7 +36,7 @@ content-type: application/json
 PUT http://localhost:4000/api/users/9f64a367-686d-4ab1-9d0b-d3ceff1e65fe
 
 {
-  "name": "Alex",
+  "username": "Alex",
   "age": 88,
   "hobbies":[]
 }
@@ -46,7 +46,7 @@ PUT http://localhost:4000/api/users/3a513123-c822-4040-a83f-1b88f3defec5
 content-type: application/json
 
 {
-  "name": "Alex",
+  "username": "Alex",
   "hobbies":[]
 }
 
@@ -55,7 +55,7 @@ PUT http://localhost:4000/api/users/some_id
 content-type: application/json
 
 {
-  "name": "Alex",
+  "username": "Alex",
   "age": 22,
   "hobbies":[]
 }
@@ -65,7 +65,7 @@ PUT http://localhost:4000/api/users/1c1b6a9e-97d6-4725-9776-f16bef9191f2
 content-type: application/json
 
 {
-  "name": "Alex",
+  "username": "Alex",
   "age": 22,
   "hobbies":[]
 }

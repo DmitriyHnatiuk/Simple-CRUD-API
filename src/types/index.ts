@@ -2,13 +2,13 @@ import { IncomingMessage, ServerResponse } from "http";
 
 export type UserType = {
   id: string;
-  name: string;
+  username: string;
   age: number;
   hobbies: string[];
 };
 
 export type BodyType = {
-  name: string;
+  username: string;
   age: number;
   hobbies: string[];
 };

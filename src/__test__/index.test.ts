@@ -5,7 +5,7 @@ import { UserType } from "./../types/index";
 const _server = server.listen(1234);
 
 const newUser = {
-  name: "new name",
+  username: "new name",
   age: 20,
   hobbies: ["readings"],
 };
@@ -75,7 +75,7 @@ describe("Test", () => {
 
       const { body: putBody } = putResponse;
 
-      expect(putBody.name).toBe(newUser.name);
+      expect(putBody.username).toBe(newUser.username);
     });
     test("PUT user by wrong user id should return 400|404", async () => {
       await serverStart.put(`/api/users/${NOT_EXIST_USER_ID}`).expect(404);
@@ -92,7 +92,7 @@ describe("Test", () => {
 
       const { id: userId, ...user } = body.find(
         (user: UserType) =>
-          user.name === newUser.name && user.age === newUser.age
+          user.username === newUser.username && user.age === newUser.age
       );
 
       expect(user).toEqual(newUser);
