@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true,
+    "target": "es5",
+    "module": "ES6",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "rootDir": "./src",
+    "outDir": "./src",
+    "forceConsistentCasingInFileNames": true,
+
+    "sourceMap": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"],
+  "ts-node": {
+    "esm": true
+  }
+}

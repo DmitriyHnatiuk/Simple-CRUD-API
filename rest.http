@@ -1,0 +1,84 @@
+### GET all users -- aspect code 200
+GET http://localhost:4000/api/users
+
+### GET user by user id -- aspect code 200 if user exist
+GET  http://localhost:4000/api/users/9e091880-4bca-42d3-a937-6b3b9518ac4a
+
+### GET not valid id -- aspect code 400
+GET http://localhost:4000/api/users/some_id
+
+### GET not existing user -- aspect code 404
+GET http://localhost:4000/api/users/7ca29540-0942-411e-852a-45c169817964
+
+### POST add new user -- aspect code 201
+POST http://localhost:4000/api/users
+content-type: application/json
+
+{
+    "username": "Alex",
+    "age":23,
+    "hobbies": [
+      "Sing",
+      "Guitars"
+    ]
+} 
+
+### POST add new user NOT valid body -- aspect code 500
+POST http://localhost:4000/api/users
+content-type: application/json
+
+{
+    "username": "Alex",
+    "age" : "age",
+} 
+
+### PUT update user by user id -- aspect code 200
+PUT http://localhost:4000/api/users/9f64a367-686d-4ab1-9d0b-d3ceff1e65fe
+
+{
+  "username": "Alex",
+  "age": 88,
+  "hobbies":[]
+}
+
+### PUT update user by user id NOT exist -- aspect code 404
+PUT http://localhost:4000/api/users/3a513123-c822-4040-a83f-1b88f3defec5
+content-type: application/json
+
+{
+  "username": "Alex",
+  "hobbies":[]
+}
+
+### PUT update user by user id NOT valid user id -- aspect code 400
+PUT http://localhost:4000/api/users/some_id
+content-type: application/json
+
+{
+  "username": "Alex",
+  "age": 22,
+  "hobbies":[]
+}
+
+### PUT update user by user id user NOT existing -- aspect code 404
+PUT http://localhost:4000/api/users/1c1b6a9e-97d6-4725-9776-f16bef9191f2
+content-type: application/json
+
+{
+  "username": "Alex",
+  "age": 22,
+  "hobbies":[]
+}
+
+### DELELTE delete user by user id -- aspect code 204 if user exist
+DELETE http://localhost:4000/api/users/99dbef6e-741d-4a20-95c2-bf4775facc70
+
+### DELETE delete user by user id NOT Valid -- aspect code 400
+DELETE http://localhost:4000/api/users/some_id
+
+
+### DELETE delete user by user id NOT exist -- aspect code 404
+DELETE http://localhost:4000/api/users/a1ed4ab0-9b7a-4af8-a6a7-28136f8a44a4
+
+### GET 404 Page not found
+GET http://localhost:4000/api/not_exist_page
