@@ -11,8 +11,8 @@ const totalCPUs = cpus().length;
 
 const PORT = Number(process.env.PORT) || 3000;
 
-process.once("uncaughtException", (error) => console.log(error));
-process.once("SIGINT", () => process.exit());
+process.on("uncaughtException", (error) => console.log(error));
+process.on("SIGINT", () => process.exit());
 
 function updateData(data: DataType, id: number) {
   for (const worker of Object.values(cluster.workers)) {
